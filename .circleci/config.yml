@@ -15,7 +15,7 @@ jobs:
           username: $DOCKER_HUB_USERNAME
           password: $DOCKER_HUB_ACCESS_TOKEN
         environment:
-          POSTGRES_USER: circleci
+          TEST_DATABASE_URL: circleci://postgres@localhost:5432/postgres_test
           TZ: "/usr/share/zoneinfo/Asia/Tokyo"
       - image: circleci/postgres:13.3
         auth:
@@ -23,7 +23,8 @@ jobs:
           password: $DOCKER_HUB_ACCESS_TOKEN
         environment:
           POSTGRES_USER: circleci
-          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_DB: postgres_test
+          POSTGRES_PASSWORD: ""
           TZ: "/usr/share/zoneinfo/Asia/Tokyo"
     steps:
       - checkout
@@ -31,7 +32,7 @@ jobs:
           sudo rm -rf /var/lib/apt/lists/*
           sudo apt update
           sudo apt install postgresql-client-12
-      - run: |
+      - run: |          
           dockerize -wait tcp://localhost:5432 -timeout 3m
       - run: |
           psql \
