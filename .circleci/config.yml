@@ -32,7 +32,8 @@ jobs:
           sudo rm -rf /var/lib/apt/lists/*
           sudo apt update
           sudo apt install postgresql-client-12
-      - run: whoami
+      - run: |
+          dockerize -wait tcp://localhost:5432 -timeout 1m
       - run: |
           psql \
           -d $TEST_DATABASE_URL \
