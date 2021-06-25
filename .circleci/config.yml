@@ -33,7 +33,7 @@ jobs:
           sudo apt update
           sudo apt install postgresql-client-12
       - run: |          
-          dockerize -wait tcp://localhost:5432 -timeout 3m
+          dockerize -wait tcp://localhost:5432 -timeout 1m
       - run: |
           psql \
           -d $TEST_DATABASE_URL \
@@ -43,6 +43,6 @@ jobs:
           -d $TEST_DATABASE_URL \
           -c "INSERT INTO test (name) VALUES ('舟木'), ('森本'), ('ローズ'), ('ズーバー');"
       - run:
-          psql \ 
+          psql \
           -d $TEST_DATABASE_URL \
-          -c "SELECT * from test ORDER BY name;"
+          -c "SELECT * from test;"
