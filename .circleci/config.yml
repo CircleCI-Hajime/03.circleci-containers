@@ -30,6 +30,7 @@ jobs:
     steps:
       - checkout
       - run: |
+          sudo rm -rf /var/lib/apt/lists/* \
           sudo apt update \
           sudo apt install postgresql-client-12
       - run: whoami
