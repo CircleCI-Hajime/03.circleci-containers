@@ -3,20 +3,28 @@ version: 2.1
 workflows:
   myWorkflow:
     jobs:
-      - build
+      - build:
+          context:
+            - docker
 
 jobs:
   build:
     docker:
       - image: cimg/python:3.9.5
+        auth:
+          username: $DOCKER_HUB_USERNAME
+          password: $DOCKER_HUB_ACCESS_TOKEN
         environment:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
-      - image: circleci/postgres:12.7-ram
+      - image: circleci/postgres:9.6.5-alpine-ram
+        auth:
+          username: $DOCKER_HUB_USERNAME
+          password: $DOCKER_HUB_ACCESS_TOKEN
         environment:
           POSTGRES_USER: postgres
     steps:
       - checkout
-      - run: sudo apt install postgresql-client-12.7
+      - run: sudo apt install postgresql-client-9.6
       - run: whoami
       - run: |
           psql \
