@@ -15,6 +15,7 @@ jobs:
           username: $DOCKER_HUB_USERNAME
           password: $DOCKER_HUB_ACCESS_TOKEN
         environment:
+          LANG: ja_JP.utf8
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: circle_test
@@ -23,6 +24,7 @@ jobs:
           username: $DOCKER_HUB_USERNAME
           password: $DOCKER_HUB_ACCESS_TOKEN
         environment:
+          LANG: ja_JP.utf8
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: circle_test
