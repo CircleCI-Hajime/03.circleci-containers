@@ -15,7 +15,7 @@ jobs:
           username: $DOCKER_HUB_USERNAME
           password: $DOCKER_HUB_ACCESS_TOKEN
         environment:
-          TEST_DATABASE_URL: circleci://postgres@localhost:5432/postgres_test
+          TEST_DATABASE_URL: postgres://circleci@localhost:5432/postgres_test
           TZ: "/usr/share/zoneinfo/Asia/Tokyo"
       - image: circleci/postgres:13.3
         auth:
@@ -24,7 +24,7 @@ jobs:
         environment:
           POSTGRES_USER: circleci
           POSTGRES_DB: postgres_test
-          POSTGRES_PASSWORD: ""
+          POSTGRES_HOST_AUTH_METHOD: trust
           TZ: "/usr/share/zoneinfo/Asia/Tokyo"
     steps:
       - checkout
