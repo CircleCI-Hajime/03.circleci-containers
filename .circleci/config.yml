@@ -24,7 +24,7 @@ jobs:
           POSTGRES_USER: postgres
     steps:
       - checkout
-      - run: sudo apt install postgresql-client-9.6
+      - run: sudo apt install postgresql-client-12
       - run: whoami
       - run: |
           psql \
